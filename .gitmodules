@@ -1,0 +1,3 @@
+[submodule "kanjicanvas"]
+	path = kanjicanvas
+	url = https://github.com/asdfjkl/kanjicanvas.git
