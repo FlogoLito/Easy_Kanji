@@ -1,7 +1,7 @@
 <template>
     <div class="main-page">
-        <h1>Prof Kanji</h1>
-        <h2>{{ tableN5[0].translation }}</h2>
+        <h1>Easy Kanji</h1>
+        <h2>{{ deck[0].translation }}</h2>
 
         <canvas id="can" class="main-page__canva" :width="heightCanvas" :height="widthCanvas"></canvas>
         <div class="main-page__buttons">
@@ -19,16 +19,19 @@ import { onMounted, ref } from 'vue'
 import { modKanjiCanvas } from './KanjiCanvaWraper'
 import dicoN5 from '../../public/jlptn5.json'
 
-var tableN5 = dicoN5.Jlptn5
-const kanjiToGuess = ref("")
+var deck = ref(dicoN5.Jlptn5)
 
 var canvas: HTMLCanvasElement;
 var ctx: CanvasRenderingContext2D | null;
 
 var heightCanvas = 1000;
 var widthCanvas = 1000;
+var leapSuccess = 10;
+var leapFail = 2;
 
 var pencilSize = 40;
+
+var state = { DrawKanji: 1, GuessKanji: 2, TryAgain: 3 }
 
 type iKanjiCanvas = {
 
@@ -42,20 +45,23 @@ type iKanjiCanvas = {
 const KanjiCanvas = modKanjiCanvas as unknown as iKanjiCanvas;
 
 function check() {
+    var kanjiToGuess = deck.value[0].kanji;
     var result = KanjiCanvas.recognize('can');
-    kanjiToGuess.value = tableN5[0].kanji;
-    if (result.includes(kanjiToGuess.value)) {
+    console.log(kanjiToGuess)
+    if (result.includes(kanjiToGuess)) {
         console.log("SUCCESS");
+        KanjiCanvas.erase('can');
         if (ctx !== null) {
             // Set it again because the recognize function changed it to draw 
             // the numbers
             ctx.lineWidth = pencilSize;
+            putBack(leapSuccess);
         }
     }
     else {
         console.log("fail");
         erase();
-        drawResult(kanjiToGuess.value);
+        drawResult(kanjiToGuess);
     }
 
     console.log(result);
@@ -75,6 +81,26 @@ function drawResult(kanjiToGuess: string) {
     // the numbers
     ctx.lineWidth = pencilSize;
 
+}
+
+function putBack(leap: number) {
+    // puts back the card in the deck
+    // actually moving the card by leap in the array
+
+    var card = deck.value.shift()
+    if (card === undefined) {
+        throw console.error("shift failed");
+    }
+    deck.value.splice(leap - 1, 0, card);
+
+    console.log(deck)
+
+
+
+
+}
+
+function flipCard() {
 
 }
 
@@ -105,8 +131,6 @@ onMounted(() => {
         return;
     }
 
-    kanjiToGuess.value = tableN5[0].kanji;
-    console.log(kanjiToGuess)
 
     ctx.lineWidth = pencilSize;
 
