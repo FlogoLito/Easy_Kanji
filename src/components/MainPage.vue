@@ -1,6 +1,7 @@
 <template>
     <div class="main-page">
         <h1>Prof Kanji</h1>
+        <h2>{{ tableN5[0].translation }}</h2>
 
         <canvas id="can" class="main-page__canva" :width="heightCanvas" :height="widthCanvas"></canvas>
         <div class="main-page__buttons">
@@ -14,11 +15,12 @@
     
 <script setup lang="ts">
 
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { modKanjiCanvas } from './KanjiCanvaWraper'
 import dicoN5 from '../../public/jlptn5.json'
 
 var tableN5 = dicoN5.Jlptn5
+const kanjiToGuess = ref("")
 
 var canvas: HTMLCanvasElement;
 var ctx: CanvasRenderingContext2D | null;
@@ -41,11 +43,11 @@ const KanjiCanvas = modKanjiCanvas as unknown as iKanjiCanvas;
 
 function check() {
     var result = KanjiCanvas.recognize('can');
-    var kanjiToMatch = tableN5[0].kanji;
-    if (result.includes(kanjiToMatch)) {
+    kanjiToGuess.value = tableN5[0].kanji;
+    if (result.includes(kanjiToGuess.value)) {
         console.log("SUCCESS");
         if (ctx !== null) {
-            // Set again because recognize function changed it to draw 
+            // Set it again because the recognize function changed it to draw 
             // the numbers
             ctx.lineWidth = pencilSize;
         }
@@ -53,13 +55,13 @@ function check() {
     else {
         console.log("fail");
         erase();
-        drawResult(kanjiToMatch);
+        drawResult(kanjiToGuess.value);
     }
 
     console.log(result);
 }
 
-function drawResult(kanjiToMatch: string) {
+function drawResult(kanjiToGuess: string) {
 
     if (ctx === null) {
         throw console.error("canvas context null");
@@ -68,7 +70,7 @@ function drawResult(kanjiToMatch: string) {
     ctx.textBaseline = 'hanging'
     ctx.textAlign = 'center'
     ctx.strokeStyle = "grey"
-    ctx.strokeText(kanjiToMatch, canvas.width / 2, canvas.height / 3);
+    ctx.strokeText(kanjiToGuess, canvas.width / 2, canvas.height / 3);
     // Set again because recognize function changed it to draw 
     // the numbers
     ctx.lineWidth = pencilSize;
@@ -102,6 +104,9 @@ onMounted(() => {
         console.log(Error)
         return;
     }
+
+    kanjiToGuess.value = tableN5[0].kanji;
+    console.log(kanjiToGuess)
 
     ctx.lineWidth = pencilSize;
 
