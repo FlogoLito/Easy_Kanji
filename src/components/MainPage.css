@@ -7,4 +7,37 @@
 }
 .main-page__canva {
         border: solid 1px black;
+        /* width: 40vw; */
+
+}
+
+.main-page__kanji-div {
+    width: 40vw;
+    /* height: 40vh; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main-page__kanji-text {
+    width: 100%;
+    height: 100%;
+    font-size: 400px;
+    text-orientation: vertical;
+
+}
+
+.main-page__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+
+    width: 50vw;
+    height: 5vh;
+
+}
+
+.main-page__buttons button {
+    height: 100%;
+    width: 10%;
 }

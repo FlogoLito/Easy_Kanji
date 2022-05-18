@@ -3,17 +3,31 @@
         <h1>Easy Kanji</h1>
 
         <h2 v-if="!checkFliped">{{ deck[0].translation }}</h2>
-        <h2 v-else="checkFliped">{{ deck[0].kanji }}</h2>
+        <!-- <h2 v-else="checkFliped">{{ deck[0].kanji }}</h2> -->
 
-        <canvas id="can" class="main-page__canva" :width="heightCanvas" :height="widthCanvas"></canvas>
-        <div class="main-page__buttons">
-            <button class="main-page__erase" @click="erase()">Erase</button>
-            <button class="main-page__undo" @click="undo()">Undo</button>
-
-            <button v-if="!checkFliped" class="main-page__check" @click="check()">Check</button>
-            <button class="main-page__next" @click="next()">Next</button>
+        <canvas
+            v-show="!checkFliped"
+            id="can"
+            class="main-page__canva"
+            :width="widthCanvas"
+            :height="heightCanvas"
+        ></canvas>
+        <div v-if="checkFliped" class="main-page__kanji-div">
+            <div class="main-page__kanji-text">{{ deck[0].kanji }}</div>
         </div>
-        <div id="candidateList"></div>
+        <div class="main-page__buttons">
+            <button class="main-page__next" @click="next()">Next</button>
+            <button v-if="!checkFliped" class="main-page__erase" @click="erase()">Erase</button>
+            <button v-if="!checkFliped" class="main-page__undo" @click="undo()">Undo</button>
+            <button v-if="!checkFliped" class="main-page__check" @click="check()">Check</button>
+        </div>
+        <div v-if="checkFliped" class="main-page__answers">
+            <button
+                class="main-page__answers-buttons"
+                v-for="answer in getAnswers"
+                @click="checkAnswer(answer)"
+            >{{ answer }}</button>
+        </div>
     </div>
 </template>
     
@@ -21,17 +35,14 @@
 
 import { computed, onMounted, ref } from 'vue'
 import { modKanjiCanvas } from './KanjiCanvaWraper'
-import { deck, putBack, flipCard } from './Deck/deck'
+import { deck, success, failure, putBack } from './Deck/deck'
 
 
 var canvas: HTMLCanvasElement;
 var ctx: CanvasRenderingContext2D | null;
 
-var heightCanvas = 1000;
-var widthCanvas = 1000;
-var leapSuccess = 10;
-var leapFail = 2;
-var leapNext = leapSuccess
+var widthCanvas = document.documentElement.clientWidth * 0.5
+var heightCanvas = document.documentElement.clientHeight * 0.5
 
 var pencilSize = 40;
 
@@ -71,11 +82,10 @@ function check() {
             // If the player failed, he can try again but the card will still
             // be pushed near and not flipped
             if (currentState.value === State.drawKanjiState) {
-                flipCard();// flip the card
-                putBack(leapSuccess);// and move it
+                success();
             }
             else if (currentState.value === State.tryAgainState) {
-                putBack(leapFail);
+                failure();
             }
             currentState.value = State.drawKanjiState;
         }
@@ -90,6 +100,7 @@ function check() {
     console.log(result);
     // mainState();
 }
+
 
 function drawResult(kanjiToGuess: string) {
 
@@ -111,9 +122,9 @@ function drawResult(kanjiToGuess: string) {
 function next() {
 
     //When clicked, skip this card 
-    putBack(leapNext);
-    // mainState();
-
+    KanjiCanvas.erase('can');
+    putBack(10);
+    //TODO : clarify next button
 }
 
 function erase() {
@@ -124,40 +135,54 @@ function undo() {
     KanjiCanvas.deleteLast('can');
 }
 
-function mainState() {
-    // Check the card
-    // if fliped, guess kanji
-    // else, draw kanji
 
-    // if (currentState.value === State.tryAgainState) {
-    //     // The player can try again until success or next
-    //     return;
-    // }
 
-    // if (deck.value[0].flip !== false || deck.value[0].flip === undefined) {
-    //     //Show traduction and draw the kanji
-    //     currentState.value = State.drawKanjiState;
-    // }
-    // else {
-    //     //Show kanji and guess it
-    //     currentState.value = State.guessKanjiState;
-    // }
+function getRandomInt(max: number) {
+    return Math.floor(Math.random() * max + 1);
 }
 
+function checkAnswer(answer: string) {
+    if (answer === deck.value[0].translation) {
+        // good answer 
+        success();
+    }
+    else {
+        failure();
+    }
+}
+
+var getAnswers = computed(() => {
+    var answers = [];
+
+    // var goodAnswer = deck.value[0].translation;
+
+
+    do {
+        var wrongAnswer1 = getRandomInt(deck.value.length)
+        var wrongAnswer2 = getRandomInt(deck.value.length)
+        var wrongAnswer3 = getRandomInt(deck.value.length)
+    } while (wrongAnswer1 === wrongAnswer2
+    || wrongAnswer1 === wrongAnswer3
+        || wrongAnswer2 === wrongAnswer3
+    )
+
+    answers.push(deck.value[0].translation);
+    answers.push(deck.value[wrongAnswer1].translation);
+    answers.push(deck.value[wrongAnswer2].translation);
+    answers.push(deck.value[wrongAnswer3].translation);
+
+    return answers.sort((a, b) => 0.5 - Math.random());
+})
 
 var checkFliped = computed(() => {
     if (deck.value[0].flip === undefined || deck.value[0].flip === false) {
-        console.log("return false")
         return false;
     }
     else {
-        console.log("return true")
         return true;
     }
 }
 )
-
-
 
 
 onMounted(() => {
