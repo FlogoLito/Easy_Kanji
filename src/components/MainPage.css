@@ -1,18 +1,43 @@
 .main-page {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
     row-gap: 10px;
+    height: 100vh;
+    position : inherit;
 }
-.main-page__canva {
-        border: solid 1px black;
+
+.main-page__container-canvas {
+    
+    /* border: solid red 30px; */
+    border-radius: 10%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+/* @media only screen and (max-width: 720px) { */
+    @media only screen and (orientation: portrait) {
+    .main-page__container-canvas {
+        width : 100%;
+        height: 50%;
+        border :30px solid salmon;
+        box-sizing: border-box;
+    }
+}
+
+.main-page__canvas {
         /* width: 40vw; */
+        border-radius: 30px;
+
 
 }
 
 .main-page__kanji-div {
-    width: 40vw;
     /* height: 40vh; */
     display: flex;
     justify-content: center;
@@ -30,14 +55,30 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 10px;
+    flex-direction: column;
+    /* column-gap: 10px; */
+    row-gap: 10px;
 
-    width: 50vw;
-    height: 5vh;
 
 }
 
 .main-page__buttons button {
     height: 100%;
     width: 10%;
+}
+
+.main-page__answers {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    height: 30%;
+}
+
+.main-page__answers-buttons--wrong {
+    color : red;
+}
+
+.main-page__answers-buttons--good {
+    color: green;
 }

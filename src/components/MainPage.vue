@@ -3,20 +3,16 @@
         <h1>Easy Kanji</h1>
 
         <h2 v-if="!checkFliped">{{ deck[0].translation }}</h2>
-        <!-- <h2 v-else="checkFliped">{{ deck[0].kanji }}</h2> -->
 
-        <canvas
-            v-show="!checkFliped"
-            id="can"
-            class="main-page__canva"
-            :width="widthCanvas"
-            :height="heightCanvas"
-        ></canvas>
-        <div v-if="checkFliped" class="main-page__kanji-div">
-            <div class="main-page__kanji-text">{{ deck[0].kanji }}</div>
+        <div class="main-page__container-canvas">
+            <canvas v-show="!checkFliped" id="can" class="main-page__canvas"></canvas>
+            <!-- style=" width: 100%; height: auto;" -->
+            <div v-if="checkFliped" class="main-page__kanji-div">
+                <div class="main-page__kanji-text">{{ deck[0].kanji }}</div>
+            </div>
         </div>
         <div class="main-page__buttons">
-            <button class="main-page__next" @click="next()">Next</button>
+            <button v-if="!checkFliped" class="main-page__next" @click="next()">Next</button>
             <button v-if="!checkFliped" class="main-page__erase" @click="erase()">Erase</button>
             <button v-if="!checkFliped" class="main-page__undo" @click="undo()">Undo</button>
             <button v-if="!checkFliped" class="main-page__check" @click="check()">Check</button>
@@ -26,6 +22,10 @@
                 class="main-page__answers-buttons"
                 v-for="answer in getAnswers"
                 @click="checkAnswer(answer)"
+                :class="{
+                    'main-page__answers-buttons--wrong': answer !== deck[0].translation && toggleVerify,
+                    'main-page__answers-buttons--good': answer === deck[0].translation && toggleVerify
+                }"
             >{{ answer }}</button>
         </div>
     </div>
@@ -41,10 +41,17 @@ import { deck, success, failure, putBack } from './Deck/deck'
 var canvas: HTMLCanvasElement;
 var ctx: CanvasRenderingContext2D | null;
 
-var widthCanvas = document.documentElement.clientWidth * 0.5
-var heightCanvas = document.documentElement.clientHeight * 0.5
+var cssVarBorderWidth: number = 0;
+
+
+// var widthCanvas = document.documentElement.clientWidth * 0.5
+// var heightCanvas = document.documentElement.clientHeight * 0.5
+
+
 
 var pencilSize = 40;
+
+var toggleVerify = ref(false)
 
 
 enum State {
@@ -141,14 +148,22 @@ function getRandomInt(max: number) {
     return Math.floor(Math.random() * max + 1);
 }
 
+
 function checkAnswer(answer: string) {
-    if (answer === deck.value[0].translation) {
-        // good answer 
-        success();
-    }
-    else {
-        failure();
-    }
+    toggleVerify.value = true;
+    setTimeout(() => {
+        if (answer === deck.value[0].translation) {
+            // good answer 
+
+            success();
+            toggleVerify.value = false;
+        }
+        else {
+            // wrong: show good answer before jump to next
+            failure();
+            toggleVerify.value = false;
+        }
+    }, 2000);
 }
 
 var getAnswers = computed(() => {
@@ -186,7 +201,7 @@ var checkFliped = computed(() => {
 
 
 onMounted(() => {
-    KanjiCanvas.init('can')
+
 
     try {
         canvas = document.getElementById('can') as HTMLCanvasElement;
@@ -202,6 +217,15 @@ onMounted(() => {
         console.log(Error)
         return;
     }
+
+    cssVarBorderWidth = 10;
+    ctx.canvas.width = innerWidth - 70; // substract the double of the border width
+    ctx.canvas.height = innerHeight / 2 - 70;
+
+    console.log(ctx.canvas.height);
+    console.log(canvas.getBoundingClientRect().height)
+
+    KanjiCanvas.init('can')
 
     ctx.lineWidth = pencilSize;
 

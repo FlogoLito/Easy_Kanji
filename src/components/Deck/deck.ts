@@ -31,7 +31,7 @@ export function success(){
 
 export function failure() {
     decreaseCounter();
-    putBack(leapFailure);
+    putBack(leapFail);
 }
 
 export function putBack(leap: number) {
@@ -47,7 +47,6 @@ export function putBack(leap: number) {
     {
         leap += card.counter*card.counter;
     }
-
 
     deck.value.splice(leap - 1, 0, card);
 
