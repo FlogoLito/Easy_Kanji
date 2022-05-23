@@ -1,10 +1,13 @@
 <template>
     <div class="main-page">
-        <h1>Easy Kanji</h1>
-
-        <h2 v-if="!checkFliped">{{ deck[0].translation }}</h2>
+        <div class="main-page__title">
+            <h1>Easy Kanji</h1>
+        </div>
 
         <div class="main-page__container-canvas">
+            <div class="main-page__translation">
+                <h2 v-if="!checkFliped">{{ deck[0].translation }}</h2>
+            </div>
             <canvas v-show="!checkFliped" id="can" class="main-page__canvas"></canvas>
             <!-- style=" width: 100%; height: auto;" -->
             <div v-if="checkFliped" class="main-page__kanji-div">
@@ -144,10 +147,6 @@ function undo() {
 
 
 
-function getRandomInt(max: number) {
-    return Math.floor(Math.random() * max + 1);
-}
-
 
 function checkAnswer(answer: string) {
     toggleVerify.value = true;
@@ -165,6 +164,11 @@ function checkAnswer(answer: string) {
         }
     }, 2000);
 }
+
+function getRandomInt(max: number) {
+    return Math.floor(Math.random() * max + 1);
+}
+
 
 var getAnswers = computed(() => {
     var answers = [];

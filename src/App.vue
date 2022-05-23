@@ -15,10 +15,10 @@ import MainPage from './components/MainPage.vue';
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
 body {
   margin: 0;
-  background-color: snow;
+  background-color: #ffe7e7;
 }
 </style>
