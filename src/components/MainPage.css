@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 20px;
     height: 100vh;
     position : inherit;
 }
@@ -17,6 +17,7 @@
     font-size: large;
     letter-spacing: 1em;
     text-align: center;
+    margin-bottom: 5%;
 }
 
 
@@ -36,11 +37,14 @@
 
 .main-page__translation {
     width: 100%;
-    height: 10%;
+    height: 8%;
     border-radius: 20px 20px 0 0;
 
     background-color: #FF6160;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 
@@ -50,8 +54,8 @@
     .main-page__container-canvas {
         width : 100%;
         height: 50%;
+        border :20px solid #FF6160 ;
         box-sizing: border-box;
-        border :30px solid #FF6160 ;
     }
 }
 
@@ -78,7 +82,7 @@
 
 .main-page__buttons {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     /* column-gap: 10px; */
@@ -88,21 +92,53 @@
 
 }
 
-.main-page__buttons button {
+/* .main-page__buttons button {
     height: 100%;
     width: 10%;
+} */
+.main-page__buttons-row {
+    display: flex;
+    /* flex: 1; */
+    justify-content: space-evenly;
+    border : solid red;
+    width : 100%;
+    height:  15%;
+    
 }
-@media only screen and (orientation: portrait) {
+
+.main-page__buttons-row button {
+    font-size: 2em;
+    width: 25%
+
+}
+
+.main-page__buttons-center {
+    border : solid blue;
+    /* flex: 1; */
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 80%;
+    width: 50%;
+
+}
+
+.main-page__buttons-center button {
+    height: 50%;
+    font-size: 3em;
+}
+
+/* @media only screen and (orientation: portrait) { */
     .main-page__buttons button {
-        flex: 1;
-        width: 100%;
-        font-size: 150%;
+        /* flex: 1; */
+        /* width: 100%; */
         background-color: #40508B;
         color: white;
-        border-radius: 50%;
+        border-radius: 50px;
+        font-family: Overlock SC;
 
     }
-}
+/* } */
 
 .main-page__answers {
     display: flex;
