@@ -1,7 +1,7 @@
 <template>
     <div class="main-page">
         <div class="main-page__title">
-            <h1>Easy Kanji</h1>
+            <h1>EASY KANJI</h1>
         </div>
 
         <div class="main-page__container-canvas">
@@ -15,10 +15,14 @@
             </div>
         </div>
         <div class="main-page__buttons">
-            <button v-if="!checkFliped" class="main-page__next" @click="next()">Next</button>
-            <button v-if="!checkFliped" class="main-page__erase" @click="erase()">Erase</button>
-            <button v-if="!checkFliped" class="main-page__undo" @click="undo()">Undo</button>
-            <button v-if="!checkFliped" class="main-page__check" @click="check()">Check</button>
+            <div class="main-page__buttons-row">
+                <button v-if="!checkFliped" class="main-page__erase" @click="erase()">erase</button>
+                <button v-if="!checkFliped" class="main-page__undo" @click="undo()">undo</button>
+                <button v-if="!checkFliped" class="main-page__next" @click="next()">next</button>
+            </div>
+            <div class="main-page__buttons-center">
+                <button v-if="!checkFliped" class="main-page__check" @click="check()">CHECK</button>
+            </div>
         </div>
         <div v-if="checkFliped" class="main-page__answers">
             <button
