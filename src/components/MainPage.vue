@@ -6,25 +6,25 @@
 
         <div class="main-page__container-canvas">
             <div class="main-page__translation">
-                <h2 v-if="!checkFliped">{{ deck[0].translation }}</h2>
+                <h2 v-if="checkFliped">{{ deck[0].translation }}</h2>
             </div>
-            <canvas v-show="!checkFliped" id="can" class="main-page__canvas"></canvas>
+            <canvas v-show="checkFliped" id="can" class="main-page__canvas"></canvas>
             <!-- style=" width: 100%; height: auto;" -->
-            <div v-if="checkFliped" class="main-page__kanji-div">
+            <div v-if="!checkFliped" class="main-page__kanji-div">
                 <div class="main-page__kanji-text">{{ deck[0].kanji }}</div>
             </div>
         </div>
-        <div class="main-page__buttons">
+        <div v-if="checkFliped" class="main-page__buttons">
             <div class="main-page__buttons-row">
-                <button v-if="!checkFliped" class="main-page__erase" @click="erase()">erase</button>
-                <button v-if="!checkFliped" class="main-page__undo" @click="undo()">undo</button>
-                <button v-if="!checkFliped" class="main-page__next" @click="next()">next</button>
+                <button class="main-page__erase" @click="erase()">erase</button>
+                <button class="main-page__undo" @click="undo()">undo</button>
+                <button class="main-page__next" @click="next()">next</button>
             </div>
             <div class="main-page__buttons-center">
-                <button v-if="!checkFliped" class="main-page__check" @click="check()">CHECK</button>
+                <button v-if="checkFliped" class="main-page__check" @click="check()">CHECK</button>
             </div>
         </div>
-        <div v-if="checkFliped" class="main-page__answers">
+        <div v-if="!checkFliped" class="main-page__answers">
             <button
                 class="main-page__answers-buttons"
                 v-for="answer in getAnswers"
