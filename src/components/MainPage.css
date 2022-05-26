@@ -20,18 +20,55 @@
     margin-bottom: 5%;
 }
 
+.main-page__card-container {
+    position: relative;
+    width: 100%;
+    height: 50%;
+    perspective: 2000px; 
+}
+.main-page__card-container:hover .main-page__card {
+    transform: rotateY(180deg);
+    
 
+}
+
+.main-page__card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    
+
+}
+
+
+.main-page__verso {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: rotateY(180deg);
+}
 
 .main-page__container-canvas {
     
     /* border: solid red 30px; */
     border-radius: 10%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
     
+    width : 100%;
+    height: 100%;
+    border :20px solid #FF6160 ;
+    box-sizing: border-box;
+    position :absolute;
 
 }
 
@@ -49,15 +86,6 @@
 }
 
 
-/* @media only screen and (max-width: 720px) { */
-    @media only screen and (orientation: portrait) {
-    .main-page__container-canvas {
-        width : 100%;
-        height: 50%;
-        border :20px solid #FF6160 ;
-        box-sizing: border-box;
-    }
-}
 
 .main-page__canvas {
         /* width: 40vw; */
@@ -72,6 +100,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .main-page__kanji-text {
     width: 100%;
     height: 100%;
