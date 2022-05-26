@@ -4,14 +4,19 @@
             <h1>EASY KANJI</h1>
         </div>
 
-        <div class="main-page__container-canvas">
-            <div class="main-page__translation">
-                <h2 v-if="checkFliped">{{ deck[0].translation }}</h2>
-            </div>
-            <canvas v-show="checkFliped" id="can" class="main-page__canvas"></canvas>
-            <!-- style=" width: 100%; height: auto;" -->
-            <div v-if="!checkFliped" class="main-page__kanji-div">
-                <div class="main-page__kanji-text">{{ deck[0].kanji }}</div>
+        <div class="main-page__card-container">
+            <div class="main-page__card">
+                <div class="main-page__container-canvas">
+                    <div class="main-page__translation">
+                        <h2 v-if="checkFliped">{{ deck[0].translation }}</h2>
+                    </div>
+                    <canvas v-show="checkFliped" id="can" class="main-page__canvas"></canvas>
+                    <!-- style=" width: 100%; height: auto;" -->
+                    <div v-if="!checkFliped" class="main-page__kanji-div">
+                        <div class="main-page__kanji-text">{{ deck[0].kanji }}</div>
+                    </div>
+                </div>
+                <Verso :prop="deck[0]" class="main-page__verso"></Verso>
             </div>
         </div>
         <div v-if="checkFliped" class="main-page__buttons">
@@ -43,6 +48,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { modKanjiCanvas } from './KanjiCanvaWraper'
 import { deck, success, failure, putBack } from './Deck/deck'
+import Verso from './Card/Verso.vue'
 
 
 var canvas: HTMLCanvasElement;
