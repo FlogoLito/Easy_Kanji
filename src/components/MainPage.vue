@@ -5,7 +5,7 @@
         </div>
 
         <div class="main-page__card-container">
-            <div class="main-page__card">
+            <div class="main-page__card" :class="{ 'main-page__card--rotate': rotate }">
                 <div class="main-page__container-canvas">
                     <div class="main-page__translation">
                         <h2 v-if="checkFliped">{{ deck[0].translation }}</h2>
@@ -16,7 +16,13 @@
                         <div class="main-page__kanji-text">{{ deck[0].kanji }}</div>
                     </div>
                 </div>
-                <Verso :prop="deck[0]" class="main-page__verso"></Verso>
+                <Verso
+                    :prop="deck[0]"
+                    class="main-page__verso"
+                    :class="{
+                        'main-page__verso--next': animNext,
+                    }"
+                ></Verso>
             </div>
         </div>
         <div v-if="checkFliped" class="main-page__buttons">
@@ -40,6 +46,20 @@
                 }"
             >{{ answer }}</button>
         </div>
+        <transition name="fade">
+            <div
+                v-if="toggleVerify"
+                class="main-page__overlay"
+                :class="{
+                    'main-page__overlay--good': isGoodAnswer,
+                    'main-page__overlay--wrong': !isGoodAnswer,
+                }"
+            >
+                <button class="main-page__overlay-button" @click="goNext(isGoodAnswer)">Next</button>
+            </div>
+        </transition>
+        <!-- <transition name="fade">
+        </transition>-->
     </div>
 </template>
     
@@ -65,6 +85,12 @@ var cssVarBorderWidth: number = 0;
 var pencilSize = 40;
 
 var toggleVerify = ref(false)
+
+var rotate = ref(false)
+
+var isGoodAnswer = ref(false)
+
+var animNext = ref(false)
 
 
 enum State {
@@ -160,19 +186,44 @@ function undo() {
 
 function checkAnswer(answer: string) {
     toggleVerify.value = true;
-    setTimeout(() => {
-        if (answer === deck.value[0].translation) {
-            // good answer 
+    console.log("on est la")
+    rotate.value = true;
+    // setTimeout(() => {
+    //     rotate.value = false;
+    if (answer === deck.value[0].translation) {
+        // good answer 
+        isGoodAnswer.value = true;
 
-            success();
-            toggleVerify.value = false;
-        }
-        else {
-            // wrong: show good answer before jump to next
-            failure();
-            toggleVerify.value = false;
-        }
-    }, 2000);
+
+        // change color to green
+    }
+    else {
+        // wrong: show good answer before jump to next
+        isGoodAnswer.value = false;
+    }
+    // }, 2000);
+}
+
+//when clicked on button next after answering
+// Send verso to the right
+// Make it invisible
+// flip the card
+// make verso visible when click on answer
+function goNext(isSuccess: boolean) {
+    animNext.value = true;
+    setTimeout(() => {
+        animNext.value = false;
+        // versoHidden.value = true;
+    }, 1500)
+    if (isSuccess) {
+        success();
+    }
+    else {
+        failure();
+
+    }
+    rotate.value = false;
+    toggleVerify.value = false;
 }
 
 function getRandomInt(max: number) {
