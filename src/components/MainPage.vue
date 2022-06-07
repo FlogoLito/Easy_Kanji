@@ -5,8 +5,11 @@
         </div>
 
         <div class="main-page__card-container">
-            <div class="main-page__card" :class="{ 'main-page__card--rotate': rotate }">
-                <div class="main-page__container-canvas">
+            <div class="main-page__card">
+                <div
+                    class="main-page__container-canvas"
+                    :class="{ 'main-page__container-canvas--rotate': rotate }"
+                >
                     <div class="main-page__translation">
                         <h2 v-if="checkFliped">{{ deck[0].translation }}</h2>
                     </div>
@@ -17,10 +20,11 @@
                     </div>
                 </div>
                 <Verso
-                    :prop="deck[0]"
+                    :prop="versoKanji"
                     class="main-page__verso"
                     :class="{
                         'main-page__verso--next': animNext,
+                        'main-page__verso--rotate': rotate
                     }"
                 ></Verso>
             </div>
@@ -40,10 +44,6 @@
                 class="main-page__answers-buttons"
                 v-for="answer in getAnswers"
                 @click="checkAnswer(answer)"
-                :class="{
-                    'main-page__answers-buttons--wrong': answer !== deck[0].translation && toggleVerify,
-                    'main-page__answers-buttons--good': answer === deck[0].translation && toggleVerify
-                }"
             >{{ answer }}</button>
         </div>
         <transition name="fade">
@@ -91,6 +91,8 @@ var rotate = ref(false)
 var isGoodAnswer = ref(false)
 
 var animNext = ref(false)
+
+var versoKanji = ref(deck.value[0])
 
 
 enum State {
@@ -186,7 +188,9 @@ function undo() {
 
 function checkAnswer(answer: string) {
     toggleVerify.value = true;
+    versoKanji.value = deck.value[0];
     console.log("on est la")
+
     rotate.value = true;
     // setTimeout(() => {
     //     rotate.value = false;
@@ -211,6 +215,12 @@ function checkAnswer(answer: string) {
 // make verso visible when click on answer
 function goNext(isSuccess: boolean) {
     animNext.value = true;
+    rotate.value = false;
+
+    // setTimeout(() => {
+    //     rotate.value = false;
+    //     // versoHidden.value = true;
+    // }, 1500)
     setTimeout(() => {
         animNext.value = false;
         // versoHidden.value = true;
@@ -222,7 +232,6 @@ function goNext(isSuccess: boolean) {
         failure();
 
     }
-    rotate.value = false;
     toggleVerify.value = false;
 }
 
