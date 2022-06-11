@@ -54,9 +54,36 @@
 .main-page__verso--next {
     
     /* transition: transform  ; */
-    transform: translateX(100vw);
-    animation-duration: 2s;
-    animation-delay: 1s;
+    /* transform: translateX(100vw); */
+    /* animation-duration: 20s; */
+    /* animation-delay: 1s; */
+    animation-name: move_and_disapear;
+    animation-duration : 0.5s;
+    right: 100vh;
+    position: absolute;
+
+}
+
+@keyframes move_and_disapear {
+    from {
+        right: 0vh;
+        position: absolute;
+        /* transform: rotateY(0deg); */
+    }
+    90% {
+        right: 100vh;
+    }
+    to {
+        transform: rotateY(360deg);
+
+    }
+    100% {
+    }
+    
+}
+
+.main-page__verso--hidden {
+    visibility: hidden;
 }
 
 .main-page__container-canvas {

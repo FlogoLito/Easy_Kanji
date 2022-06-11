@@ -8,7 +8,7 @@
             <div class="main-page__card">
                 <div
                     class="main-page__container-canvas"
-                    :class="{ 'main-page__container-canvas--rotate': rotate }"
+                    :class="{ 'main-page__container-canvas--rotate': rotateCanvas }"
                 >
                     <div class="main-page__translation">
                         <h2 v-if="checkFliped">{{ deck[0].translation }}</h2>
@@ -24,7 +24,7 @@
                     class="main-page__verso"
                     :class="{
                         'main-page__verso--next': animNext,
-                        'main-page__verso--rotate': rotate
+                        'main-page__verso--rotate': rotateVerso,
                     }"
                 ></Verso>
             </div>
@@ -86,11 +86,14 @@ var pencilSize = 40;
 
 var toggleVerify = ref(false)
 
-var rotate = ref(false)
+var rotateCanvas = ref(false)
+var rotateVerso = ref(false)
 
 var isGoodAnswer = ref(false)
 
 var animNext = ref(false)
+
+var isVersoVisible = ref(false)
 
 var versoKanji = ref(deck.value[0])
 
@@ -189,9 +192,10 @@ function undo() {
 function checkAnswer(answer: string) {
     toggleVerify.value = true;
     versoKanji.value = deck.value[0];
-    console.log("on est la")
+    animNext.value = false;
 
-    rotate.value = true;
+    rotateCanvas.value = true;
+    rotateVerso.value = true;
     // setTimeout(() => {
     //     rotate.value = false;
     if (answer === deck.value[0].translation) {
@@ -209,22 +213,19 @@ function checkAnswer(answer: string) {
 }
 
 //when clicked on button next after answering
-// Send verso to the right
-// Make it invisible
+// Send verso to the left   
 // flip the card
 // make verso visible when click on answer
 function goNext(isSuccess: boolean) {
     animNext.value = true;
-    rotate.value = false;
+    toggleVerify.value = false;
+    rotateCanvas.value = false;
+    rotateVerso.value = false;
 
     // setTimeout(() => {
     //     rotate.value = false;
     //     // versoHidden.value = true;
     // }, 1500)
-    setTimeout(() => {
-        animNext.value = false;
-        // versoHidden.value = true;
-    }, 1500)
     if (isSuccess) {
         success();
     }
@@ -232,7 +233,11 @@ function goNext(isSuccess: boolean) {
         failure();
 
     }
-    toggleVerify.value = false;
+    setTimeout(() => {
+        // animNext.value = false;
+        // rotateVerso.value = false;
+        // versoHidden.value = true;
+    }, 1000)
 }
 
 function getRandomInt(max: number) {
@@ -263,6 +268,8 @@ var getAnswers = computed(() => {
     return answers.sort((a, b) => 0.5 - Math.random());
 })
 
+
+
 var checkFliped = computed(() => {
     if (deck.value[0].flip === undefined || deck.value[0].flip === false) {
         return false;
@@ -272,7 +279,6 @@ var checkFliped = computed(() => {
     }
 }
 )
-
 
 onMounted(() => {
 
