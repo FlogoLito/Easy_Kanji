@@ -5,29 +5,31 @@
         </div>
 
         <div class="main-page__card-container">
-            <div class="main-page__card">
-                <div
-                    class="main-page__container-canvas"
-                    :class="{ 'main-page__container-canvas--rotate': rotateCanvas }"
-                >
-                    <div class="main-page__translation">
-                        <h2 v-if="checkFliped">{{ deck[0].translation }}</h2>
+            <transition name="fade">
+                <div class="main-page__card">
+                    <div
+                        class="main-page__container-canvas"
+                        :class="{ 'main-page__container-canvas--rotate': rotateCanvas }"
+                    >
+                        <div v-if="checkFliped" class="main-page__translation">
+                            <h2>{{ deck[0].translation }}</h2>
+                        </div>
+                        <canvas v-show="checkFliped" id="can" class="main-page__canvas"></canvas>
+                        <!-- style=" width: 100%; height: auto;" -->
+                        <div v-if="!checkFliped" class="main-page__kanji-div">
+                            <div class="main-page__kanji-text">{{ deck[0].kanji }}</div>
+                        </div>
                     </div>
-                    <canvas v-show="checkFliped" id="can" class="main-page__canvas"></canvas>
-                    <!-- style=" width: 100%; height: auto;" -->
-                    <div v-if="!checkFliped" class="main-page__kanji-div">
-                        <div class="main-page__kanji-text">{{ deck[0].kanji }}</div>
-                    </div>
+                    <Verso
+                        :prop="versoKanji"
+                        class="main-page__verso"
+                        :class="{
+                            'main-page__verso--next': animNext,
+                            'main-page__verso--rotate': rotateVerso,
+                        }"
+                    ></Verso>
                 </div>
-                <Verso
-                    :prop="versoKanji"
-                    class="main-page__verso"
-                    :class="{
-                        'main-page__verso--next': animNext,
-                        'main-page__verso--rotate': rotateVerso,
-                    }"
-                ></Verso>
-            </div>
+            </transition>
         </div>
         <div v-if="checkFliped" class="main-page__buttons">
             <div class="main-page__buttons-row">
@@ -74,7 +76,6 @@ import Verso from './Card/Verso.vue'
 var canvas: HTMLCanvasElement;
 var ctx: CanvasRenderingContext2D | null;
 
-var cssVarBorderWidth: number = 0;
 
 
 // var widthCanvas = document.documentElement.clientWidth * 0.5
@@ -121,7 +122,13 @@ const KanjiCanvas = modKanjiCanvas as unknown as iKanjiCanvas;
 function check() {
     var kanjiToGuess = deck.value[0].kanji;
     var result = KanjiCanvas.recognize('can');
-    console.log(kanjiToGuess)
+    console.log(kanjiToGuess);
+    toggleVerify.value = true;
+    versoKanji.value = deck.value[0];
+    animNext.value = false;
+
+    rotateCanvas.value = true;
+    rotateVerso.value = true;
     if (result.includes(kanjiToGuess)) {
         console.log("SUCCESS");
         KanjiCanvas.erase('can');
@@ -217,6 +224,7 @@ function checkAnswer(answer: string) {
 // flip the card
 // make verso visible when click on answer
 function goNext(isSuccess: boolean) {
+    erase();
     animNext.value = true;
     toggleVerify.value = false;
     rotateCanvas.value = false;
@@ -252,13 +260,19 @@ var getAnswers = computed(() => {
 
 
     do {
-        var wrongAnswer1 = getRandomInt(deck.value.length)
-        var wrongAnswer2 = getRandomInt(deck.value.length)
-        var wrongAnswer3 = getRandomInt(deck.value.length)
+        var wrongAnswer1 = getRandomInt(deck.value.length - 1)
+        var wrongAnswer2 = getRandomInt(deck.value.length - 1)
+        var wrongAnswer3 = getRandomInt(deck.value.length - 1)
     } while (wrongAnswer1 === wrongAnswer2
     || wrongAnswer1 === wrongAnswer3
         || wrongAnswer2 === wrongAnswer3
     )
+
+    console.log(deck.value.length)
+
+    console.log(wrongAnswer1)
+    console.log(wrongAnswer2)
+    console.log(wrongAnswer3)
 
     answers.push(deck.value[0].translation);
     answers.push(deck.value[wrongAnswer1].translation);
@@ -298,12 +312,11 @@ onMounted(() => {
         return;
     }
 
-    cssVarBorderWidth = 10;
     ctx.canvas.width = innerWidth - 70; // substract the double of the border width
     ctx.canvas.height = innerHeight / 2 - 70;
 
-    console.log(ctx.canvas.height);
-    console.log(canvas.getBoundingClientRect().height)
+    // console.log(ctx.canvas.height);
+    // console.log(canvas.getBoundingClientRect().height)
 
     KanjiCanvas.init('can')
 
