@@ -1,0 +1,13 @@
+.componentHeader {
+    display: flex;
+    justify-content: center;
+}
+.componentHeader__title {
+
+    font-family: Overlock SC;
+    font-size: large;
+    letter-spacing: 1em;
+    text-align: center;
+}
+
+

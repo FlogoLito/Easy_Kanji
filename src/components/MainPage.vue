@@ -1,8 +1,6 @@
 <template>
     <div class="main-page">
-        <div class="main-page__title">
-            <h1>EASY KANJI</h1>
-        </div>
+        <ComponentHeader class="main-page__component-header"></ComponentHeader>
 
         <div class="main-page__card-container">
             <transition name="fade">
@@ -69,8 +67,9 @@
 
 import { computed, onMounted, ref } from 'vue'
 import { modKanjiCanvas } from './KanjiCanvaWraper'
-import { deck, success, failure, putBack } from './Deck/deck'
+import { deck, success, failure, putBack, download } from './Deck/deck'
 import Verso from './Card/Verso.vue'
+import ComponentHeader from './Header/ComponentHeader.vue';
 
 
 var canvas: HTMLCanvasElement;
@@ -122,7 +121,6 @@ const KanjiCanvas = modKanjiCanvas as unknown as iKanjiCanvas;
 function check() {
     var kanjiToGuess = deck.value[0].kanji;
     var result = KanjiCanvas.recognize('can');
-    console.log(kanjiToGuess);
     toggleVerify.value = true;
     versoKanji.value = deck.value[0];
     animNext.value = false;
@@ -246,6 +244,9 @@ function goNext(isSuccess: boolean) {
         // rotateVerso.value = false;
         // versoHidden.value = true;
     }, 1000)
+
+
+
 }
 
 function getRandomInt(max: number) {
