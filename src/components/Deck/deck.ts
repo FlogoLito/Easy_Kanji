@@ -63,7 +63,7 @@ export function flipCard() {
         deck.value[0].flip = true;
     }
     else {
-        deck.value[0].flip != deck.value[0].flip;
+        deck.value[0].flip = !deck.value[0].flip;
     }
 
 
