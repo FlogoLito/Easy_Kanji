@@ -1,6 +1,7 @@
 .componentHeader {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 .componentHeader__title {
 
@@ -8,6 +9,7 @@
     font-size: large;
     letter-spacing: 1em;
     text-align: center;
+    margin-left: 10px;
 }
 
 

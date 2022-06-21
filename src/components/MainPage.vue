@@ -245,7 +245,8 @@ function goNext(isSuccess: boolean) {
         // versoHidden.value = true;
     }, 1000)
 
-
+    localStorage.setItem('myDeck', JSON.stringify(deck.value))
+    console.log("tout s'est bien passé");
 
 }
 
@@ -311,6 +312,12 @@ onMounted(() => {
     catch (Error) {
         console.log(Error)
         return;
+    }
+
+    // get the deck from localStorage if there is one
+    var stringDeck = localStorage.getItem('myDeck')
+    if (stringDeck !== null) {
+        deck.value = JSON.parse(stringDeck);
     }
 
     ctx.canvas.width = innerWidth - 70; // substract the double of the border width
