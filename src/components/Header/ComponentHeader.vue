@@ -4,7 +4,6 @@
         <div class="componentHeader__title">
             <h1>EASY KANJI</h1>
         </div>
-        <Download_img @click="onSave()"></Download_img>
     </div>
 </template>
     
@@ -16,7 +15,8 @@ import Burger from './Burger/Burger.vue';
 
 function onSave() {
 
-    download(JSON.stringify(deck.value), "myDeck.json", "text/plain");
+    // download(JSON.stringify(deck.value), "myDeck.json", "text/plain");
+
 }
 
 </script>

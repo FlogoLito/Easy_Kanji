@@ -16,9 +16,22 @@ import MainPage from './components/MainPage.vue';
   text-align: center;
   color: #2c3e50;
   /* margin-top: 60px; */
+  /* height: 100%; */
+  height: -webkit-fill-available;
 }
+#app:-webkit-full-screen {
+  display: block;
+}
+#app:-moz-full-screen {
+  display: block;
+}
+#app::fullscreen {
+  display: block;
+}
+
 body {
   margin: 0;
   background-color: #ffe7e7;
+  min-height: -webkit-fill-available;
 }
 </style>

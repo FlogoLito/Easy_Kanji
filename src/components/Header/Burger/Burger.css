@@ -3,8 +3,26 @@
     align-items: center;
     width: 40px;
     height: 40px;
+    margin-left: 30px;
+    /* margin-right: 60px;  */
+    margin-top:22px;
+
+    position: absolute;
+    top : 0px;
+
+    left: 10%;
+    transition: left 0.25s;
 
 }
+
+.burger--active {
+
+  /* right: 0%; */
+  left: 80%;
+  /* left: 90%; */
+  
+}
+
 .burger__menu-button-container {
   /* display: none; */
   /* height: 100%; */
@@ -54,4 +72,25 @@
 #burger__menu-toggle:checked + .burger__menu-button-container .burger__menu-button::after {
   margin-top: 0px;
   transform: rotate(-405deg);
+}
+
+
+.panel {
+    height: 100%;
+    width: 0;
+    position : absolute;
+    left: 0;
+    top: 0;
+
+    transition: width 0.25s;
+    background-color: #40508B;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.panel--active {
+  width: 50%;
 }
