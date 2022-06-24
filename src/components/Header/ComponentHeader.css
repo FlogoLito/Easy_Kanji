@@ -2,14 +2,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+
+    background-color: #40508B;
+    color: white;
+    width : 100%;
+    height: 7%;
+    position: relative;
 }
 .componentHeader__title {
 
     font-family: Overlock SC;
-    font-size: large;
+    /* font-size: 1em; */
     letter-spacing: 1em;
     text-align: center;
     margin-left: 10px;
 }
+
+/* @media all and (max-width: 720px ) {
+    .componentHeader__title {
+        font-size: 0.5em;
+    }
+} */
 
 

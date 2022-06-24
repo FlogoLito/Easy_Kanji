@@ -2,10 +2,22 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import MainPage from './components/MainPage.vue';
+import { ref } from 'vue';
+
+
+var trueHeight = ref(window.innerHeight);
+
+window.addEventListener("resize", onResize);
+
+
+function onResize() {
+  trueHeight.value = window.innerHeight
+}
+
 </script>
 
 <template>
-  <MainPage></MainPage>
+  <MainPage :style="{ 'height': trueHeight + 'px' }"></MainPage>
 </template>
 
 <style>
