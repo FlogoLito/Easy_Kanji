@@ -1,7 +1,7 @@
 !<template>
     <div class="verso">
         <h1 class="verso__title">{{ prop.translation }}</h1>
-        <div class="verso__kanji-div" :style="{ width: canvaWidth + 'px' }">
+        <div class="verso__kanji-div" :style="{ 'width': canvaWidth + 'px' }">
             <!-- <div class="verso__kanji-text">{{ prop.kanji }}</div> -->
             <canvas class="verso__kanji-text" id="verso_canva"></canvas>
         </div>
@@ -30,8 +30,8 @@ var ctx: CanvasRenderingContext2D | null;
 
 var pencilSize = 40;
 
-const canvaWidth = ref(500)
-const canvaHeight = ref(500)
+var canvaWidth = ref(innerWidth * 0.6)
+var canvaHeight = ref(innerHeight / 3)
 
 interface Card extends kanjiCard {
     required?: true,
@@ -79,6 +79,15 @@ onUpdated(() => {
     KanjiCanvas.erase('verso_canva');
     drawResult(props.prop.kanji)
 })
+
+
+
+window.addEventListener("resize", onResize);
+
+function onResize() {
+    canvaWidth.value = window.innerWidth - 70;
+    canvaHeight.value = window.innerHeight / 2 - 70;
+}
 
 
 onMounted(() => {
