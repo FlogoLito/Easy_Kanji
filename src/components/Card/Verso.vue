@@ -21,14 +21,14 @@
 </template>
     
 <script setup lang="ts">
-import { ref, onMounted, onActivated, onUpdated } from 'vue';
+import { ref, onMounted, onUpdated } from 'vue';
 import { modKanjiCanvas } from '../KanjiCanvaWraper'
-import { flipCard, kanjiCard } from '../Deck/deck';
+import { kanjiCard } from '../Deck/deck';
 
 var canvas: HTMLCanvasElement;
 var ctx: CanvasRenderingContext2D | null;
 
-var pencilSize = 40;
+var pencilSize = 15;
 
 var canvaWidth = ref(innerWidth * 0.6)
 var canvaHeight = ref(innerHeight / 3)
