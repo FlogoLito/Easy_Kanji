@@ -97,6 +97,9 @@ export function decreaseCounter() {
     }
 }
 
+export function resetDeck() {
+    deck.value = dicoN5.Jlptn5 ;
+}
 
 
 export function  download(content, fileName, contentType) {

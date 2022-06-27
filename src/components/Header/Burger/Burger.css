@@ -14,7 +14,7 @@
 
     left: 5%;
     transition: left 0.25s;
-    z-index: 3;
+    z-index: 4;
 
 }
 
@@ -95,11 +95,45 @@
     background-color: #40508B;
     color: white;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    z-index: 3;
+    flex-direction: column;
+
+    /* row-gap: 20%; */
+    z-index: 4;
 }
 
 .panel--active {
   width: 50%;
+}
+
+.panel__section-footer {
+  font-size: 2em;
+
+}
+
+.panel__section-main {
+  font-size: 2.5em;
+}
+
+
+.panel__overlay {
+  position : fixed;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  background-color: black;
+  opacity: 50%;
+  z-index: 3;
+
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 1s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }

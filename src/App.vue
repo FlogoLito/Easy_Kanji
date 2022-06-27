@@ -45,5 +45,6 @@ body {
   margin: 0;
   background-color: #ffe7e7;
   min-height: -webkit-fill-available;
+  overscroll-behavior-y: contain;
 }
 </style>

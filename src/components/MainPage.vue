@@ -82,7 +82,7 @@ var ctx: CanvasRenderingContext2D | null;
 
 
 
-var pencilSize = 40;
+var pencilSize = 15;
 
 var toggleVerify = ref(false)
 
