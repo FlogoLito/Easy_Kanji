@@ -14,10 +14,10 @@
         </div>
     </div>
     <transition name="fade" v-if="isOpen">
-        <div class="panel__overlay" :style="{ 'height': trueHeight + 'px' }"></div>
+        <div class="panel__overlay" :style="{ 'height': trueHeight + 'px' }" @click="onClickOverlay()"></div>
     </transition>
     <div class="burger" :class="{ 'burger--active': isOpen, }">
-        <input id="burger__menu-toggle" type="checkbox" @click="openCloseMenu()" />
+        <input type="checkbox" :class="{'burger__menu-toggle--open': isOpen, 'burger__menu-toggle':!isOpen }" @click="openCloseMenu()" />
         <label class="burger__menu-button-container" for="burger__menu-toggle">
             <div class="burger__menu-button"></div>
         </label>
@@ -51,6 +51,9 @@ function onResize() {
     trueHeight.value = window.innerHeight
 }
 
+function onClickOverlay() {
+    isOpen.value = false;
+}
 </script>
     
 <style src="./Burger.css" scoped>

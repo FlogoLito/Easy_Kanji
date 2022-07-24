@@ -1,9 +1,9 @@
 !<template>
     <div class="verso">
         <h1 class="verso__title">{{ prop.translation }}</h1>
-        <div class="verso__kanji-div" :style="{ 'width': canvaWidth + 'px' }">
+        <div class="verso__kanji-div" :style="{ 'width': canvaWidth + 'px'}">
             <!-- <div class="verso__kanji-text">{{ prop.kanji }}</div> -->
-            <canvas class="verso__kanji-text" id="verso_canva"></canvas>
+            <canvas  id="verso_canva"></canvas>
         </div>
         <div class="verso__kanas">
             <div class="verso__onyomi-kunyomi">
@@ -28,10 +28,10 @@ import { kanjiCard } from '../Deck/deck';
 var canvas: HTMLCanvasElement;
 var ctx: CanvasRenderingContext2D | null;
 
-var pencilSize = 15;
+var pencilSize = 10;
 
-var canvaWidth = ref(innerWidth * 0.6)
-var canvaHeight = ref(innerHeight / 3)
+var canvaWidth = ref(innerWidth * 0.66)
+var canvaHeight = ref(innerHeight * 0.4)
 
 interface Card extends kanjiCard {
     required?: true,
@@ -85,8 +85,8 @@ onUpdated(() => {
 window.addEventListener("resize", onResize);
 
 function onResize() {
-    canvaWidth.value = window.innerWidth - 70;
-    canvaHeight.value = window.innerHeight / 2 - 70;
+    // canvaWidth.value = window.innerWidth - 70;
+    // canvaHeight.value = window.innerHeight / 2 - 70;
 }
 
 

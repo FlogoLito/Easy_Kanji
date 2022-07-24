@@ -7,6 +7,11 @@ Using flashcard methodology, you will be able to learn all kanji for jlpt, from 
 
 ## Getting started 
 
+First download the submodule : 
+`git submodule init`
+`git submodule update`
+
+
 This project is built with vuejs Vite and Typescript. To build it, simply run : 
 `npm install`
 `npm run build`

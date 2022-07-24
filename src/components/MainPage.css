@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    row-gap: 20px;
+    row-gap: 10px;
     height: 100vh;
     height: calc(var(--trueHeight)*100px);
     width:100vw;
@@ -25,16 +25,11 @@ h2 {
 
 
 
-.main-page__component-header {
-
-    margin-bottom: 5%;
-
-}
 
 .main-page__card-container {
     position: relative;
     width: 100%;
-    height: 50%;
+    height: 60%;
     z-index: 2;
 }
 
@@ -111,7 +106,7 @@ h2 {
     
     width : 100%;
     height: 100%;
-    border :20px solid #FF6160 ;
+    border :15px solid #FF6160 ;
     box-sizing: border-box;
     position :absolute;
 
@@ -129,7 +124,8 @@ h2 {
 .main-page__translation {
     width: 100%;
     height: 8%;
-    border-radius: 20px 20px 0 0;
+    border : solid 5px #FF6160;
+    border-radius: 10px 10px 0px 0px;
 
     background-color: #FF6160;
     color: white;
@@ -138,6 +134,8 @@ h2 {
     align-items: center;
     position : absolute;
     top : 0px;
+
+    font-size: 0.8em;
 
 }
 
@@ -233,10 +231,17 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex-grow: 1;
     /* height: 30%; */
-    flex: 1;
+    /* flex: 1; */
+    /* flex-basis: 100%; */
     width: 100%;
+
+    gap: 10px;
+
+    margin-bottom: 5px;
 }
 
 
@@ -244,10 +249,16 @@ h2 {
 
     background-color: #40508B;
     color: white;
-    border-radius: 50px;
+    border-radius: 30px;
     width: 90%;
     height: 15%;
     font-size: 1.5em;
+
+    width: 45%;
+    height: 40%;
+    flex-shrink: 2;
+    /* flex-basis: 100%; */
+    /* flex-grow: 1; */
 }
 
 .main-page__answers-buttons--wrong {
@@ -260,13 +271,13 @@ h2 {
 
 button {
 
-    box-shadow: 0 10px #273153;
+    box-shadow: 0 5px #273153;
     border: none ;
     transition: all .05s ease 0s;
 }
 
 button:active {
-    box-shadow: 0 5px #273153;
+    box-shadow: 0 1px #273153;
     transform: translateY(5px);
 
 }
@@ -299,8 +310,8 @@ button:active {
     height: 10%;
     /* bottom: 30%;
     left: 30%; */
-    margin-bottom: 30%;
-    box-shadow: 0 10px #993838;
+    margin-bottom: 15%;
+    box-shadow: 0 5px #993838;
     background-color: #FF6160;
     color: white;
     font-size: 1.5em;
@@ -311,7 +322,7 @@ button:active {
 
 
 .main-page__overlay-button:active {
-    box-shadow: 0 5px #b94444;
+    box-shadow: 0 1px #b94444;
     transform: translateY(5px);
 }
 
