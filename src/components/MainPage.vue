@@ -93,8 +93,6 @@ var isGoodAnswer = ref(false)
 
 var animNext = ref(false)
 
-var isVersoVisible = ref(false)
-
 var versoKanji = ref(deck.value[0])
 
 
@@ -134,23 +132,14 @@ function check() {
             // Set it again because the recognize function changed it to draw 
             // the numbers
             ctx.lineWidth = pencilSize;
+            isGoodAnswer.value = true;
 
-            // If the player failed, he can try again but the card will still
-            // be pushed near and not flipped
-            if (currentState.value === State.drawKanjiState) {
-                success();
-            }
-            else if (currentState.value === State.tryAgainState) {
-                failure();
-            }
-            currentState.value = State.drawKanjiState;
         }
     }
     else {
-        console.log("fail");
+        console.log("on est dans fail");
         erase();
-        drawResult(kanjiToGuess);
-        currentState.value = State.tryAgainState;
+        isGoodAnswer.value = false;
     }
 
     console.log(result);
@@ -270,12 +259,6 @@ var getAnswers = computed(() => {
         || wrongAnswer2 === wrongAnswer3
     )
 
-    console.log(deck.value.length)
-
-    console.log(wrongAnswer1)
-    console.log(wrongAnswer2)
-    console.log(wrongAnswer3)
-
     answers.push(deck.value[0].translation);
     answers.push(deck.value[wrongAnswer1].translation);
     answers.push(deck.value[wrongAnswer2].translation);
@@ -321,7 +304,7 @@ onMounted(() => {
     }
 
     ctx.canvas.width = innerWidth - 70; // substract the double of the border width
-    ctx.canvas.height = innerHeight / 2 - 70;
+    ctx.canvas.height = innerHeight * 0.6 - 70;
 
     // console.log(ctx.canvas.height);
     // console.log(canvas.getBoundingClientRect().height)
