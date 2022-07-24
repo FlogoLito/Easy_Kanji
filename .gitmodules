@@ -1,0 +1,3 @@
+[submodule "kanjicanvas"]
+	path = kanjicanvas
+	url = git@github.com:FlogoLito/kanjicanvas.git
