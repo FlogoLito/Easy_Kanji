@@ -4,6 +4,10 @@
         <div class="componentHeader__title">
             <h1>EASY KANJI</h1>
         </div>
+        <div @click="toggleFullScreen()" class="componentHeader__fullScreen">
+            <full-screen></full-screen>
+
+        </div>
     </div>
 </template>
     
@@ -11,6 +15,37 @@
 import { download, deck } from '../Deck/deck';
 import Download_img from './download_img.vue';
 import Burger from './Burger/Burger.vue';
+import fullScreen from '../icons/fullScreen.vue';
+
+var isFullScreen = false;
+
+const elem = document.getElementById("app");
+
+
+function toggleFullScreen(){
+
+    isFullScreen = !isFullScreen;
+
+    if (elem === null) 
+    {
+        return ;
+    }
+
+    if (!isFullScreen)
+    {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        }
+    }
+    else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        }
+    }
+
+
+
+}
 
 
 function onSave() {
