@@ -107,6 +107,17 @@
     z-index: 4;
 }
 
+@media all and (min-width : 1280px)
+{
+  .panel {
+    width: 265px;
+  }
+  .burger {
+    display: none;
+  }
+
+}
+
 .panel--active {
   width: 50%;
 }

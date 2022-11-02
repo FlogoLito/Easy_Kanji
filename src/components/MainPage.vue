@@ -305,6 +305,10 @@ onMounted(() => {
 
     ctx.canvas.width = innerWidth - 70; // substract the double of the border width
     ctx.canvas.height = innerHeight * 0.6 - 70;
+    
+    if (innerWidth > 750){
+        ctx.canvas.width = 750;
+    }
 
     // console.log(ctx.canvas.height);
     // console.log(canvas.getBoundingClientRect().height)
