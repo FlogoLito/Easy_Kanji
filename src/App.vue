@@ -30,9 +30,12 @@ function onResize() {
   /* margin-top: 60px; */
   /* height: 100%; */
   height: -webkit-fill-available;
+  background-color: #ffe7e7;
 }
 #app:-webkit-full-screen {
   display: block;
+  width: 100%;
+  height: 100%;
 }
 #app:-moz-full-screen {
   display: block;
