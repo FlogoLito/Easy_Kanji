@@ -30,8 +30,10 @@ h2 {
     position: relative;
     width: 100%;
     height: 60%;
+    max-width: 750px;
     z-index: 2;
 }
+
 
 
 .main-page__card {
@@ -125,8 +127,7 @@ h2 {
     width: 100%;
     height: 8%;
     border : solid 5px #FF6160;
-    border-radius: 10px 10px 0px 0px;
-
+    border-radius: 26px 26px 0px 0px;
     background-color: #FF6160;
     color: white;
     display: flex;
@@ -178,6 +179,7 @@ h2 {
     /* column-gap: 10px; */
 
     width: 100%;
+    max-width: 750px;
     height: 30%;
 
 }
