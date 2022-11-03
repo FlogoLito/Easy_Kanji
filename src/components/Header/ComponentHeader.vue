@@ -21,10 +21,14 @@ var isFullScreen = false;
 
 const elem = document.getElementById("app");
 
+document.addEventListener("fullscreenchange", function( event ) {
+
+
+});
+
 
 function toggleFullScreen(){
 
-    isFullScreen = !isFullScreen;
 
     if (elem === null) 
     {
@@ -33,6 +37,7 @@ function toggleFullScreen(){
 
     if (!isFullScreen)
     {
+        
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
         }
@@ -42,17 +47,13 @@ function toggleFullScreen(){
             document.exitFullscreen();
         }
     }
+    
+    isFullScreen = !isFullScreen;
 
 
 
 }
 
-
-function onSave() {
-
-    // download(JSON.stringify(deck.value), "myDeck.json", "text/plain");
-
-}
 
 </script>
     

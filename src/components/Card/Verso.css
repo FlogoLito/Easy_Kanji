@@ -42,6 +42,7 @@
     background-color: #FF6160;
     color: white;
     font-family: Overlock SC;
+    font-size: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,6 +79,7 @@
     flex-direction: column;
 
     /* font-size: x-large; */
+    font-size: 1.5em;
     font-family: Overlock SC;
     color : white;
     font-weight: bold;
@@ -88,10 +90,10 @@
 }
 
 
-@media all and (max-width: 720px)
+@media all and (min-width: 720px)
 {
 .verso__onyomi-kunyomi
 {
-    font-size:1.5em;
+    font-size:2em;
 }
 }

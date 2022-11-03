@@ -57,7 +57,6 @@ const props = defineProps<{ prop: Card }>()
 
 function drawResult(kanjiToGuess: string) {
 
-    console.log(kanjiToGuess)
     if (canvas === undefined) {
         throw console.error("canvas undefined")
     }
@@ -102,14 +101,18 @@ onMounted(() => {
         }
     }
     catch (Error) {
-        console.log(Error)
         return;
     }
     // cssVarBorderWidth = 10;
-    console.log(canvaWidth.value);
-    console.log(canvaHeight.value);
+    if (canvaWidth.value > 750)
+    {
+        canvaWidth.value = 600;
+    }
     ctx.canvas.width = canvaWidth.value; // substract the double of the border width
     ctx.canvas.height = canvaHeight.value;
+
+
+
 
     KanjiCanvas.init('verso_canva')
 

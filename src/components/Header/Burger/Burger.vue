@@ -4,8 +4,8 @@
         :style="{ 'height': trueHeight + 'px' }"
         :class="{ 'panel--active': isOpen }"
     >
-        <div v-if="isOpen || isDesktop" class="panel__section-main">
-            <div class="panel__section" @click="resetDeck()">Reset deck</div>
+        <div v-if="isOpen || isDesktop" @click="clickReset()" class="panel__section-main">
+            <div class="panel__section" >Reset deck</div>
         </div>
 
         <div v-if="isOpen || isDesktop" class="panel__section-footer">
@@ -32,17 +32,14 @@ var isOpen = ref(false)
 var isDesktop = ref(false)
 var trueHeight = ref(window.innerHeight);
 
-
-// function resetDeck() {
-//     console.log("reset deck")
-//     resetDeck();
-
-// }
-
-
 function openCloseMenu() {
     isOpen.value = !isOpen.value;
 
+}
+
+function clickReset() {
+    resetDeck();
+    isOpen.value = false;
 }
 
 window.addEventListener("resize", onResize);
