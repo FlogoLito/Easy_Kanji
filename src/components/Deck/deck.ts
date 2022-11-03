@@ -50,7 +50,6 @@ export function putBack(leap: number) {
 
     deck.value.splice(leap - 1, 0, card);
 
-    console.log(deck)
 
 }
 

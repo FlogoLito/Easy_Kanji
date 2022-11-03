@@ -10,7 +10,7 @@
                         :class="{ 'main-page__container-canvas--rotate': rotateCanvas }"
                     >
                         <div v-if="checkFliped" class="main-page__translation">
-                            <h2>{{ deck[0].translation }}</h2>
+                            <h1>{{ deck[0].translation }}</h1>
                         </div>
                         <canvas v-show="checkFliped" id="can" class="main-page__canvas"></canvas>
                         <!-- style=" width: 100%; height: auto;" -->
@@ -76,12 +76,6 @@ var canvas: HTMLCanvasElement;
 var ctx: CanvasRenderingContext2D | null;
 
 
-
-// var widthCanvas = document.documentElement.clientWidth * 0.5
-// var heightCanvas = document.documentElement.clientHeight * 0.5
-
-
-
 var pencilSize = 15;
 
 var toggleVerify = ref(false)
@@ -96,13 +90,6 @@ var animNext = ref(false)
 var versoKanji = ref(deck.value[0])
 
 
-enum State {
-    drawKanjiState = "DrawKanjiState",
-    guessKanjiState = "GuessKanjiState",
-    findTradState = "FindTradState",
-    tryAgainState = "TryAgainState"
-}
-var currentState = ref(State.drawKanjiState);
 
 
 type iKanjiCanvas = {
@@ -126,7 +113,6 @@ function check() {
     rotateCanvas.value = true;
     rotateVerso.value = true;
     if (result.includes(kanjiToGuess)) {
-        console.log("SUCCESS");
         KanjiCanvas.erase('can');
         if (ctx !== null) {
             // Set it again because the recognize function changed it to draw 
@@ -137,32 +123,18 @@ function check() {
         }
     }
     else {
-        console.log("on est dans fail");
+        if (ctx !== null) {
+            ctx.lineWidth = pencilSize;
+        }
         erase();
         isGoodAnswer.value = false;
     }
 
-    console.log(result);
     // mainState();
 }
 
 
-function drawResult(kanjiToGuess: string) {
 
-    if (ctx === null) {
-        throw console.error("canvas context null");
-    }
-    ctx.font = canvas.height * 0.7 + 'px bold serif';
-    ctx.textBaseline = 'hanging'
-    ctx.textAlign = 'center'
-    // ctx.strokeStyle = "Gainsboro"
-    ctx.fillStyle = "Gainsboro"
-    ctx.fillText(kanjiToGuess, canvas.width / 2, canvas.height / 3);
-    // Set again because recognize function changed it to draw 
-    // the numbers
-    ctx.lineWidth = pencilSize;
-
-}
 
 function next() {
 
@@ -235,7 +207,6 @@ function goNext(isSuccess: boolean) {
     }, 1000)
 
     localStorage.setItem('myDeck', JSON.stringify(deck.value))
-    console.log("tout s'est bien passé");
 
 }
 
@@ -293,27 +264,31 @@ onMounted(() => {
         }
     }
     catch (Error) {
-        console.log(Error)
         return;
     }
 
+    ctx.canvas.width = window.innerWidth;
+    ctx.canvas.height = window.innerHeight;
+    KanjiCanvas.init('can')
     // get the deck from localStorage if there is one
     var stringDeck = localStorage.getItem('myDeck')
     if (stringDeck !== null) {
         deck.value = JSON.parse(stringDeck);
     }
 
-    ctx.canvas.width = innerWidth - 70; // substract the double of the border width
-    ctx.canvas.height = innerHeight * 0.6 - 70;
+    var elemCanva = document.querySelector( ".main-page__container-canvas");
+
+    
+    if (elemCanva !== null)
+    {
+        ctx.canvas.width = elemCanva.clientWidth;
+        ctx.canvas.height = elemCanva.clientHeight;
+    }
     
     if (innerWidth > 750){
         ctx.canvas.width = 750;
     }
 
-    // console.log(ctx.canvas.height);
-    // console.log(canvas.getBoundingClientRect().height)
-
-    KanjiCanvas.init('can')
 
     ctx.lineWidth = pencilSize;
 
