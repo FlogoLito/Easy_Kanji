@@ -126,6 +126,7 @@
 .panel__section-footer {
   font-size: 2em;
 
+  cursor: pointer;
 }
 
 .panel__section-main {
@@ -137,6 +138,33 @@
 
 }
 
+.panel__info-about{
+  position:absolute;
+  top:0;
+  left:0;
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 40px;
+
+  background-color: #40508B;
+  
+}
+
+.panel__cross{
+  transform: rotate(45deg);
+  /* position: absolute; */
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  font-size: 100px;
+  cursor: pointer;
+}
 
 .panel__overlay {
   position : fixed;
