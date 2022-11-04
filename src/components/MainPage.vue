@@ -67,7 +67,7 @@
 
 import { computed, onMounted, ref } from 'vue'
 import { modKanjiCanvas } from './KanjiCanvaWraper'
-import { deck, success, failure, putBack, download } from './Deck/deck'
+import { deck, success, failure, putBack } from './Deck/deck'
 import Verso from './Card/Verso.vue'
 import ComponentHeader from './Header/ComponentHeader.vue';
 

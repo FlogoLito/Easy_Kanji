@@ -25,7 +25,6 @@
       >
          <path
             style="opacity:1;fill:#ffffff;fill-opacity:0.94509804;fill-rule:nonzero;stroke:none;stroke-width:1.58158517;stroke-miterlimit:4;stroke-dasharray:1.58158517, 3.16317034;stroke-dashoffset:0;stroke-opacity:1"
-            d
             id="path6839"
             inkscape:connector-curvature="0"
             transform="translate(0,960.23623)"

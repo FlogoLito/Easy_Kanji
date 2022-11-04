@@ -12,7 +12,7 @@
 </template>
     
 <script setup lang="ts">
-import { download, deck } from '../Deck/deck';
+import {  deck } from '../Deck/deck';
 import Download_img from './download_img.vue';
 import Burger from './Burger/Burger.vue';
 import fullScreen from '../icons/fullScreen.vue';
