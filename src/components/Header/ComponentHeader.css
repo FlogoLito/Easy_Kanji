@@ -25,6 +25,11 @@
     letter-spacing: 1em;
     text-align: center;
     margin-left: 10px;
+    height:100%;
+}
+
+.componentHeader__logo{
+    height:100%;
 }
 
 /* @media all and (max-width: 720px ) {

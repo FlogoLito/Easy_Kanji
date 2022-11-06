@@ -1,5 +1,8 @@
 <template>
     <div class="panel" :style="{ 'height': trueHeight + 'px' }" :class="{ 'panel--active': isOpen }">
+        <div @click="openCloseMenu()" class="panel__cross panel__cross-menu" :class="{ 'burger--active': isOpen, }">
+            +
+        </div>
         <div v-if="isOpen || isDesktop" @click="clickReset()" class="panel__section-main">
             <div class="panel__section">Reset deck</div>
         </div>
@@ -23,7 +26,7 @@
                     aria-label="Star FlogoLito/Easy_Kanji on GitHub">Star</github-button>
             </div>
             <div>
-                Designer : Fantine Mcrgr
+                Designer : <a class="panel__designer" href="http://portfoliofanmon.tp.crea.pro " > Fantine Mcrgr</a> 
             </div>
             <div>
                 The recognition engine was developped by Dominik Klein and Seth Clydesdale
@@ -35,8 +38,8 @@
                     data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star"
                     aria-label="Star asdfjkl/kanjicanvas on GitHub">Star</github-button>
             </div>
-            <div @click="closeAboutPopin()" class="panel__cross">
-                +
+            <div @click="closeAboutPopin()" class="panel__arrow">
+                &#x2190
             </div>
         </div>
     </div>
@@ -74,6 +77,7 @@ function closeAboutPopin() {
 
 function openCloseMenu() {
     isOpen.value = !isOpen.value;
+    showAbout.value = false;
 
 }
 

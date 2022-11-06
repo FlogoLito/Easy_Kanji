@@ -2,7 +2,7 @@
     <div class="componentHeader">
         <Burger></Burger>
         <div class="componentHeader__title">
-            <h1>EASY KANJI</h1>
+            <img class="componentHeader__logo" src="/logo_blue.png"/>
         </div>
         <div @click="toggleFullScreen()" class="componentHeader__fullScreen">
             <full-screen></full-screen>
