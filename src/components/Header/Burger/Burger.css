@@ -129,6 +129,9 @@
     width: 265px;
     z-index: 1;
   }
+  .panel__cross-menu{
+    display: none;
+  }
   .burger {
     display: none;
   }
