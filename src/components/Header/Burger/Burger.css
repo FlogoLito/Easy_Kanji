@@ -14,14 +14,30 @@
 
     left: 5%;
     transition: left 0.25s;
-    z-index: 4;
+    z-index: 2;
 
+}
+
+.panel__cross-menu{
+  z-index: 5;
+  right:0px;
+  position: absolute;
+}
+
+.panel__arrow {
+  font-size: 50px;
+  cursor: pointer;
+
+}
+
+.panel__designer {
+  color :white;
 }
 
 .burger--active {
 
   /* right: 0%; */
-  left: 35%;
+  /* left: 35%; */
   /* left: 90%; */
   
 }
@@ -120,7 +136,7 @@
 }
 
 .panel--active {
-  width: 50%;
+  width: 100%;
 }
 
 .panel__section-footer {
@@ -155,6 +171,14 @@
   
 }
 
+@media all and (max-width: 750px){
+
+.panel__info-about{
+  font-size: 12px;
+
+}
+
+}
 .panel__cross{
   transform: rotate(45deg);
   /* position: absolute; */
