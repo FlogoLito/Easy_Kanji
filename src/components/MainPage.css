@@ -305,9 +305,36 @@ button:active {
 
 .main-page__overlay--good {
     background-color: rgba(9, 156, 83, 0.5);
+
+    animation-duration: 1s;
+    animation-name: blink_green;
+    animation-iteration-count: 1;
+    transition: none;
 }
+@keyframes blink_green {
+    0%   {background-color: rgba(9, 156, 83, 0.5);}
+    20%   {background-color: rgba(9, 156, 83, 0.8);}
+    40%   {background-color: rgba(9, 156, 83, 0.5);}
+    60%   {background-color: rgba(9, 156, 83, 0.8);}
+    100% {background-color: rgba(9, 156, 83, 0.5);}
+}
+
+
+
 .main-page__overlay--wrong {
     background-color: rgba(156, 9, 9, 0.5);
+
+    animation-duration: 1s;
+    animation-name: blink_red;
+    animation-iteration-count: 1;
+    transition: none;
+}
+@keyframes blink_red {
+    0%   { background-color:rgba(156, 9, 9, 0.5);}
+    20%   {background-color:rgba(156, 9, 9, 0.8);} 
+    40%   {background-color:rgba(156, 9, 9, 0.5);}
+    60%   {background-color:rgba(156, 9, 9, 0.8);}
+    100% { background-color:rgba(156, 9, 9, 0.5);}
 }
 
 .main-page__overlay-button {

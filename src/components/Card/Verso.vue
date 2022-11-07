@@ -1,5 +1,5 @@
 !<template>
-    <div class="verso">
+    <div class="verso" >
         <h1 class="verso__title">{{ prop.translation }}</h1>
         <div class="verso__kanji-div" :style="{ 'width': canvaWidth + 'px'}">
             <!-- <div class="verso__kanji-text">{{ prop.kanji }}</div> -->
