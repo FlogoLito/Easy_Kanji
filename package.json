@@ -17,5 +17,17 @@
     "typescript": "^4.5.4",
     "vite": "^2.9.9",
     "vue-tsc": "^0.34.7"
-  }
+  },
+  "description": "Welcome to Easy Kanji, the most easy way to learn kanji !",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlogoLito/Easy_Kanji.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FlogoLito/Easy_Kanji/issues"
+  },
+  "homepage": "https://github.com/FlogoLito/Easy_Kanji#readme"
 }

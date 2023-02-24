@@ -30,7 +30,7 @@ h2 {
     position: relative;
     width: 100%;
     height: 60%;
-    max-width: 750px;
+    max-width: 500px;
     z-index: 2;
 }
 
@@ -197,7 +197,6 @@ h2 {
     /* flex: 1; */
     justify-content: space-evenly;
     width : 100%;
-    height:  15%;
     
 }
 
@@ -352,6 +351,10 @@ button:active {
     border-radius: 50px;
 
 
+}
+.main-page__overlay-button--green {
+    box-shadow: 0 5px #298129;
+    background-color: #57cc57;
 }
 
 @media all and (max-height : 650px)
