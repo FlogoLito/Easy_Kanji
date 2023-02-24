@@ -1,6 +1,6 @@
 !<template>
-    <div class="verso" >
-        <h1 class="verso__title">{{ prop.translation }}</h1>
+    <div class="verso" :class="{'verso--version-green':green}">
+        <h1 class="verso__title" :class="{'verso__title--version-green':green}">{{ prop.translation }}</h1>
         <div class="verso__kanji-div" :style="{ 'width': canvaWidth + 'px'}">
             <!-- <div class="verso__kanji-text">{{ prop.kanji }}</div> -->
             <canvas  id="verso_canva"></canvas>
@@ -24,6 +24,7 @@
 import { ref, onMounted, onUpdated } from 'vue';
 import { modKanjiCanvas } from '../KanjiCanvaWraper'
 import { kanjiCard } from '../Deck/deck';
+import { Color } from 'csstype';
 
 var canvas: HTMLCanvasElement;
 var ctx: CanvasRenderingContext2D | null;
@@ -48,12 +49,13 @@ type iKanjiCanvas = {
     erase: (arg: string) => void;
 }
 
+
 // Cast type for typescript compliance
 const KanjiCanvas = modKanjiCanvas as unknown as iKanjiCanvas;
 
 // const card = defineProps<Card>()
 
-const props = defineProps<{ prop: Card }>()
+const props = defineProps<{ prop: Card, green: Boolean }>()
 
 function drawResult(kanjiToGuess: string) {
 
@@ -104,11 +106,12 @@ onMounted(() => {
         return;
     }
     // cssVarBorderWidth = 10;
+    console.log(canvaWidth.value);
     if (canvaWidth.value > 750)
     {
-        canvaWidth.value = 600;
+        canvaWidth.value = 400;
     }
-    ctx.canvas.width = canvaWidth.value; // substract the double of the border width
+    ctx.canvas.width = canvaWidth.value; 
     ctx.canvas.height = canvaHeight.value;
 
 

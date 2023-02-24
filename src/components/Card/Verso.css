@@ -13,6 +13,10 @@
     align-items: center;
 
 }
+.verso--version-green {
+    background-color: #57cc57;
+    border: #57cc57;
+}
 
 .verso__kanji-div{
     /* height: 40vh; */
@@ -53,7 +57,9 @@
 
 
 }
-
+.verso__title--version-green{
+    background-color: #57cc57;
+}
 
 
 .verso__kanas {
@@ -94,6 +100,6 @@
 {
 .verso__onyomi-kunyomi
 {
-    font-size:2em;
+    /* font-size:2em; */
 }
 }

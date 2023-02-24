@@ -20,10 +20,12 @@
                     </div>
                     <Verso
                         :prop="versoKanji"
+                        :green="isGoodAnswer"
                         class="main-page__verso"
                         :class="{
                             'main-page__verso--next': animNext,
                             'main-page__verso--rotate': rotateVerso,
+                            'main-page__verso--green': isGoodAnswer,
                         }"
                     ></Verso>
                 </div>
@@ -55,7 +57,7 @@
                     'main-page__overlay--wrong': !isGoodAnswer,
                 }"
             >
-                <button class="main-page__overlay-button" @click="goNext(isGoodAnswer)">Next</button>
+                <button class="main-page__overlay-button" :class="{'main-page__overlay-button--green': isGoodAnswer}" @click="goNext(isGoodAnswer)">Next</button>
             </div>
         </transition>
         <!-- <transition name="fade">
